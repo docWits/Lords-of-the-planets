@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить планету</title>
+</head>
+<body>
+<h1>Создать планету:</h1>
+
+<form th:action="@{/addPlanet}"
+      th:object="${planetForm}" method="POST">
+    Название планеты:
+    <input type="text" th:field="*{name}" />
+    <br/>
+    Владелец планеты:
+    <input type="text" th:field="*{lord_id}" />
+    <br/>
+    <input type="submit" value="Создать" />
+</form>
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+
+</div>
+
+<br/>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>3141</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Welcome to 3141</h1>
+<b>Вселенная исследована и поделена.</b><br>
+
+Верховный правитель назначает Повелителей Планет, общее количество которых исчисляется миллионами.<br>
+Опытные Повелители могут одновременно управлять несколькими Планетами.<br>
+Никакой демократии, поэтому одной планетой может править только один Повелитель.<br>
+<br>
+<a th:href="@{/lordList}">Список лордов</a>
+<br>
+<a th:href="@{/planetList}">Список планет</a>
+<br>
+<a th:href="@{/lazyLord}">Список лордов бездельников</a>
+<br>
+<a th:href="@{/youngLord}">Топ 10 молодых лордов</a>
+</body>
+</html>

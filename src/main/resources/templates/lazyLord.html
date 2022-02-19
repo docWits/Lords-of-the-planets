@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Бездельники</title>
+</head>
+<body>
+<a href="index">На главную</a>
+<h1>Список лордов без планеты</h1>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Имя лорда</th>
+        </tr>
+        <tr th:each ="lord : ${lords}">
+            <td th:utext="${lord.name}">...</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

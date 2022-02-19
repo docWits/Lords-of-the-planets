@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование планеты</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Редактирование планеты</h1>
+<a th:href="@{/planetList}">Назад к списку планет</a>
+<br/><br/>
+<form th:action="${add} ? @{/contacts/add} : @{/contacts/{contactId}/edit(contactId=${contact.id})}"
+      th:object="${contact}" method="POST">
+</body>
+</html>

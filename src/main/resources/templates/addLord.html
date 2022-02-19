@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить лорда</title>
+</head>
+<body>
+<h1>Создать лорда:</h1>
+
+<form th:action="@{/addLord}"
+      th:object="${lordForm}" method="POST">
+    Имя лорда:
+    <input type="text" th:field="*{name}" />
+    <br/>
+    Возраст лорда:
+    <input type="text" th:field="*{age}" />
+    <br/>
+    <input type="submit" value="Создать" />
+</form>
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+
+</div>
+
+<br/>
+</body>
+</html>

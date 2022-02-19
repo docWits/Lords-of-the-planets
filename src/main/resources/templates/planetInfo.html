@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о планете</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Информация о планете</h1>
+<a th:href="@{/planetList}">Назад к списку планет</a>
+<br/><br/>
+<div th:if="${planet}">
+    <table border="0">
+        <tr>
+            <td>ID</td>
+            <td>:</td>
+            <td th:utext="${planet.id}">...</td>
+        </tr>
+        <tr>
+            <td>Название планеты</td>
+            <td>:</td>
+            <td th:utext="${planet.name}">...</td>
+        </tr>
+        <tr>
+            <td>Владелец планеты</td>
+            <td>:</td>
+            <td th:utext="${planet.lord.name}">...</td>
+        </tr>
+    </table>
+    <br/><br/>
+    <div th:if="not ${allowDelete}">
+        <a th:href="@{/planetInfo/{id}/delete(id=${planet.id})}">Удалить</a>
+    </div>
+    <form th:if="${allowDelete}" th:action="@{/planetInfo/{id}/delete(id=${planet.id})}" method="POST">
+        Уничтожить эту планету? <input type="submit" th:value="Yes" />
+    </form>
+</div>
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"></div>
+</body>
+</html>

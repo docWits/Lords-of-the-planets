@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список планет</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<a href="index">На главную</a>
+<h1>Список планет</h1>
+<a href="addPlanet">Добавить планету</a>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Название планеты</th>
+        </tr>
+        <tr th:each ="planet : ${planets}">
+            <td ><a th:href="@{/planetInfo/{id}(id=${planet.id})}" th:utext="${planet.id}"></a></td>
+            <td th:utext="${planet.name}">...</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
