@@ -31,11 +31,13 @@ public class PlanetController {
 
     @RequestMapping(value = { "/planetList" }, method = RequestMethod.GET)
     public String planetList(Model model) {
-
-        Iterable<Planet> planets = planetRepository.findAll();
-
-        model.addAttribute("planets", planets);
-
+        Iterable<Planet> planets;
+        try {
+            planets = planetRepository.findAll();
+            model.addAttribute("planets", planets);
+        }catch (Exception ex) {
+            model.addAttribute("errorMessage","Planet not found");
+        }
         return "planetList";
     }
 
@@ -76,7 +78,7 @@ public class PlanetController {
         }
     }
 
-    @RequestMapping(value = { "/addPlanet" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/addPlanet"}, method = RequestMethod.GET)
     public String showAddPlanetPage(Model model) {
 
         PlanetForm planetForm = new PlanetForm();
@@ -86,8 +88,7 @@ public class PlanetController {
     }
 
     @RequestMapping(value = { "/addPlanet" }, method = RequestMethod.POST)
-    public String savePlanet(Model model, //
-                             @ModelAttribute("planetForm") PlanetForm planetForm) {
+    public String savePlanet(Model model, @ModelAttribute("planetForm") PlanetForm planetForm) {
 
         String name = planetForm.getName();
         Long lord_id = planetForm.getLord_id();

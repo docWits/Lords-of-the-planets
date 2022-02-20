@@ -38,14 +38,12 @@ public class LordController {
     }
 
     @RequestMapping(value = { "/addLord" }, method = RequestMethod.POST)
-    public String saveLord(Model model, //
-                           @ModelAttribute("lordForm") LordForm lordForm) {
+    public String saveLord(Model model, @ModelAttribute("lordForm") LordForm lordForm) {
 
         String name = lordForm.getName();
         int age = lordForm.getAge();
 
-        if (name!= null && name.length() > 0 //
-                && age != 0 && age < 100) {
+        if (name!= null && name.length() > 0 && age != 0) {
             Lord newLord = new Lord(name, age);
             lordRepository.save(newLord);
             return "redirect:/lordList";

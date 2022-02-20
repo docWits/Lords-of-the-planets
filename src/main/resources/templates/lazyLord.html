@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Бездельники</title>
 </head>
 <body>
@@ -9,11 +9,11 @@
 <h1>Список лордов без планеты</h1>
 <br/><br/>
 <div>
-    <table border="1">
+    <table border="1" th:id="lazy-lord-list">
         <tr>
             <th>Имя лорда</th>
         </tr>
-        <tr th:each ="lord : ${lords}">
+        <tr th:each ="lord : ${lords}" th:id="lord-id">
             <td th:utext="${lord.name}">...</td>
         </tr>
     </table>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Топ</title>
 </head>
 <body>
@@ -9,13 +9,13 @@
 <h1>ТОП 10 самых молодых лордов</h1>
 <br/><br/>
 <div>
-    <table border="1">
+    <table border="1" th:id="young-lord-list">
         <tr>
             <th>Имя лорда</th>
             <th>Возраст лорда</th>
         </tr>
-        <tr th:each ="lord : ${lords}">
-            <td th:utext="${lord.name}">...</td>
+        <tr th:each ="lord : ${lords}" th:id="lord-id">
+            <td th:utext="${lord.name}" th:class="lord-name" th:id="${lord.id}" >...</td>
             <td th:utext="${lord.age}">...</td>
         </tr>
     </table>
