@@ -15,7 +15,7 @@ public class Lord {
 
     private int age;
 
-    @OneToMany(mappedBy = "lord")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lord")
     private List<Planet> planets;
 
     public Lord() {
