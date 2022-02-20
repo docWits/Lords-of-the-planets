@@ -15,7 +15,7 @@ public class Lord {
 
     private int age;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lord")
+    @OneToMany(mappedBy = "lord")
     private List<Planet> planets;
 
     public Lord() {
@@ -26,7 +26,7 @@ public class Lord {
         this.age = age;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

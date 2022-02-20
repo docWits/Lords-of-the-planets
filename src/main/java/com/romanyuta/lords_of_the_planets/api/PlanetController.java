@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,6 +26,7 @@ public class PlanetController {
     private PlanetRepository planetRepository;
     @Autowired
     private LordRepository lordRepository;
+
 
     @Value("${error.message}")
     private String errorMessage;
@@ -83,6 +85,8 @@ public class PlanetController {
 
         PlanetForm planetForm = new PlanetForm();
         model.addAttribute("planetForm", planetForm);
+        List<Lord> lordList = lordRepository.findAll();
+        model.addAttribute("lords",lordList);
 
         return "addPlanet";
     }
@@ -93,17 +97,53 @@ public class PlanetController {
         String name = planetForm.getName();
         Long lord_id = planetForm.getLord_id();
 
-        if (name!= null && name.length() > 0 && lord_id != null) {
-            Optional<Lord> lord = lordRepository.findById(lord_id);
-            if (lord.isPresent()) {
-                Planet planet = new Planet(name, lord.get());
-                planetRepository.save(planet);
+        try {
+            if (name!= null && name.length() > 0) {
+                if (lord_id != null){
+                    Optional<Lord> lord = lordRepository.findById(lord_id);
+                    if (lord.isPresent()) {
+                        Planet planet = new Planet(name, lord.get());
+                        planetRepository.save(planet);
+                    }
+                }else{
+                        Planet planet = new Planet(name);
+                        planetRepository.save(planet);
+                }
             }
             return "redirect:/planetList";
+        }catch (Exception ex){
+            model.addAttribute("errorMessage", errorMessage);
+            return "addPlanet";
+        }
+    }
+
+    @RequestMapping(value = {"/planetInfo/{id}/edit"},method = RequestMethod.GET)
+    public String showEditPlanet(Model model,@PathVariable Long id){
+        Planet planet =null;
+        try{
+            planet = planetRepository.getById(id);
+        }catch (Exception ex){
+            model.addAttribute("errorMessage", "Planet not found");
         }
 
-        model.addAttribute("errorMessage", errorMessage);
-        return "addPlanet";
+        assert planet != null;
+        PlanetForm planetForm = null;
+        planetForm = new PlanetForm(planet.getName(), (long) 0);
+        List<Lord> lordList = lordRepository.findAll();
+        model.addAttribute("lords",lordList);
+        model.addAttribute("planetForm",planetForm);
+        return "editPlanet";
+    }
+    @RequestMapping(value = {"/planetInfo/{id}/edit"},method = RequestMethod.POST)
+    public String updatePlanet(Model model, @PathVariable Long id, @ModelAttribute("planetForm") PlanetForm planet){
+        try {
+            planetRepository.setPlanetInfoById(planet.getName(),planet.getLord_id(),id);
+            return "redirect:/planetInfo/" + id;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            model.addAttribute("errorMessage", errorMessage);
+            return "editPlanet";
+        }
     }
 
 }

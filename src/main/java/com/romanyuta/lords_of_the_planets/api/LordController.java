@@ -43,14 +43,17 @@ public class LordController {
         String name = lordForm.getName();
         int age = lordForm.getAge();
 
-        if (name!= null && name.length() > 0 && age != 0) {
-            Lord newLord = new Lord(name, age);
-            lordRepository.save(newLord);
-            return "redirect:/lordList";
-        }
 
-        model.addAttribute("errorMessage", errorMessage);
-        return "addLord";
+        try {
+            if (name!= null && name.length() > 0 && age != 0) {
+                Lord newLord = new Lord(name, age);
+                lordRepository.save(newLord);
+            }
+            return "redirect:/lordList";
+        }catch (Exception ex){
+            model.addAttribute("errorMessage", errorMessage);
+            return "addLord";
+        }
     }
 }
 

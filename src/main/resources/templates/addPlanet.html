@@ -13,7 +13,14 @@
     <input type="text" th:field="*{name}" />
     <br/>
     Владелец планеты:
-    <input type="text" th:field="*{lord_id}" placeholder="Введите id лорда" />
+    <select th:field="*{lord_id}">
+        <option value="">--</option>
+        <option th:each="lord:${lords}"
+                th:value="${lord.id}"
+                th:utext="${lord.name}">
+        </option>
+    </select>
+    <!--<input type="text" th:field="*{lord_id}" placeholder="Введите id лорда" />-->
     <br/>
     <input type="submit" value="Создать" />
 </form>

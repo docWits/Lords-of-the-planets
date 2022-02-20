@@ -17,6 +17,12 @@ public class Planet {
     public Planet() {
     }
 
+    public Planet(long id, String name, Lord lord) {
+        this.id = id;
+        this.name = name;
+        this.lord = lord;
+    }
+
     public Planet(String name, Lord lord) {
         this.name = name;
         this.lord = lord;

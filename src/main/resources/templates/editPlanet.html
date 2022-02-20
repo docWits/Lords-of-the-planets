@@ -2,14 +2,34 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Редактирование планеты</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <title>Добавить планету</title>
 </head>
 <body>
-<h1>Редактирование планеты</h1>
-<a th:href="@{/planetList}">Назад к списку планет</a>
-<br/><br/>
-<form th:action="${add} ? @{/contacts/add} : @{/contacts/{contactId}/edit(contactId=${contact.id})}"
-      th:object="${contact}" method="POST">
+<h1>Создать планету:</h1>
+
+<form th:action="@{/addPlanet}"
+      th:object="${planetForm}" method="POST">
+    Название планеты:
+    <input type="text" th:field="*{name}" />
+    <br/>
+    Владелец планеты:
+    <select th:field="*{lord_id}">
+        <option value="">--</option>
+        <option th:each="lord:${lords}"
+                th:value="${lord?.id}"
+                th:utext="${lord?.name}">
+        </option>
+    </select>
+    <!--<input type="text" th:field="*{lord_id}" placeholder="Введите id лорда" />-->
+    <br/>
+    <input type="submit" value="Изменить" />
+</form>
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+
+</div>
+
+<br/>
 </body>
 </html>

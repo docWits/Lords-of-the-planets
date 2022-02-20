@@ -19,4 +19,12 @@ public class PlanetForm {
     public void setLord_id(Long lord_id) {
         this.lord_id = lord_id;
     }
+
+    public PlanetForm() {
+    }
+
+    public PlanetForm(String name, Long lord_id) {
+        this.name = name;
+        this.lord_id = lord_id;
+    }
 }
