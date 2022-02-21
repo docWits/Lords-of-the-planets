@@ -137,14 +137,14 @@ public class PlanetController {
     }
     @RequestMapping(value = {"/planetInfo/{id}/edit"},method = RequestMethod.POST)
     public String updatePlanet(Model model, @PathVariable Long id, @ModelAttribute("planetForm") PlanetForm planet){
-        //try {
+        try {
             planetRepository.setPlanetInfoById(planet.getName(),planet.getLord_id(),id);
             return "redirect:/planetInfo/" + id;
-        //} catch (Exception exception) {
-          //  exception.printStackTrace();
-           // model.addAttribute("errorMessage", errorMessage);
-           // return "editPlanet";
-        //}
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            model.addAttribute("errorMessage", errorMessage);
+            return "editPlanet";
+        }
     }
 
 }
